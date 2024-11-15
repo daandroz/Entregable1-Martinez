@@ -78,7 +78,7 @@ function checkout(){
         priceTotal += product.price
     });
 
-    let userCheckout = confirm(message + "Este es su total: " + priceTotal + " ¿desea finalizar con su compra?");
+    let userCheckout = confirm(message + "Este es su total: $" + priceTotal + " ¿desea finalizar con su compra?");
     if (userCheckout == true) {
         carrito.length = 0
         alert("Gracias por su compra")

@@ -9,29 +9,84 @@
 
 const productos = [
 {
-    productName: "Gameboy Handheld",
-    price: 100,
+    name: "Gameboy Handheld [NEW]",
+    price: 350,
 },
 {
-    productName: "Gamecube [USED]",
+    name: "Gamecube [USED]",
     price: 300,
 },
 {
-    productName: "PSP [USED - Like new]",
+    name: "PSP [USED - Like new]",
     price: 200,
+},
+{
+    name: "Gameboy Color Camera [RARE]",
+    price: 700,
 }
 ]
+
+let carrito = []
+
 
 function mostrarProductos() {
     let mensaje = "Este es el catálogo actual en la thrift store\n\n";
     productos.forEach((producto, index) => {
-        mensaje += `${index+1}. ${producto.productName} - Precio: $${producto.price}\n`;
+        mensaje += `${index+1}. ${producto.name} - Precio: $${producto.price}\n`;
     });
     mensaje += "\nPara agregar sus productos al carrito regrese al menú principal y seleccione opción #2.";
     alert(mensaje);
 }
 
+function productSelection(){
 
+    let mensaje = "Este es el catálogo actual en la thrift store\n\n";
+    productos.forEach((producto, index) => {
+        mensaje += `${index+1}. ${producto.name} - Precio: $${producto.price}\n`;
+    });
+    mensaje += "\nIngrese el número del artículo que desea agregar a su carrito";
+    let userSelection = Number(prompt(mensaje))
+    carrito.push(productos[userSelection - 1])
+    console.table(carrito)
+    return userSelection;
+}
+
+function editCarrito(){
+    let message = "Indique el número del artículo que desea eliminar:\n\n";
+    carrito.forEach((product, index) => {
+        message += `${index + 1}. ${product.name} - Precio: $${product.price}\n`;
+    });
+    let userErase = Number(prompt(message));
+    carrito.splice(userErase - 1,1)
+    console.table(carrito)
+    return userErase;
+}
+
+function showCarrito(){
+    let message = "Retro Games Thrift Store:\n\n";
+    carrito.forEach((product, index) => {
+        message += `${index + 1}. ${product.name} - Precio: $${product.price}\n`;
+    });
+    message += "\n Estos productos se encuentran en su carrito";
+    alert(message);
+}
+
+function checkout(){
+    let priceTotal = 0
+    let message = "Carrito:\n\n";
+    carrito.forEach((product) => {
+        priceTotal += product.price
+    });
+
+    let userCheckout = confirm(message + "Este es su total: " + priceTotal + " ¿desea finalizar con su compra?");
+    if (userCheckout == true) {
+        carrito.length = 0
+        alert("Gracias por su compra")
+    }
+    console.log(priceTotal)
+    console.log(carrito)
+    return userCheckout;
+}
 
 
 function initFunction(){
@@ -46,18 +101,22 @@ function initFunction(){
 
             break;
             case 2:
+                productSelection();
                 flag = confirm("quiere seguir operando?")
 
             break;
             case 3:
+                editCarrito();
                 flag = confirm("quiere seguir operando?")
 
             break;
             case 4:
+                showCarrito();
                 flag = confirm("quiere seguir operando?")
 
             break;
             case 5:
+                checkout();
                 flag = confirm("quiere seguir operando?")
 
             break;
